@@ -11,15 +11,17 @@ import jsonUtils from "koa-json";
 import cors from "@koa/cors";
 import compose from "koa-compose";
 import compress from "koa-compress";
+import router from "./routes/routes";
+import errorHandle from "./middleware/ErrorHandle";
+
 const app = new koa();
 
 const isDevMode = process.env.NODE_ENV === "production" ? true : false;
-console.log(isDevMode, "isDevMode", process.env.NODE_ENV);
-const router = require("./routes/routes");
 const middleWare = compose([
   koaBody(),
   statics(path.join(__dirname, "../public")),
   cors(),
+  errorHandle,
   jsonUtils({
     pretty: false,
     param: "pretty",
