@@ -44,7 +44,7 @@ const publicPath = [
 
 const isDevMode = process.env.NODE_ENV !== "production";
 
-const port = 3000;
+const port = 3002;
 const wsPort = 3001;
 
 const AppID = "your-wx-appid";

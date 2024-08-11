@@ -1,15 +1,15 @@
-import mongoose from '../config/DBHelpler';
-import moment from 'dayjs';
-import { isToday } from '../common/Utils';
+import mongoose from "../config/DBHelpler";
+import moment from "dayjs";
+import { isToday } from "../common/Utils";
 
 const Schema = mongoose.Schema;
 
 const SignRecordSchema = new Schema(
   {
-    uid: { type: String, ref: 'users' },
+    uid: { type: String, ref: "users" },
     favs: { type: Number },
   },
-  { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
+  { timestamps: { createdAt: "created", updatedAt: "updated" } }
 );
 
 SignRecordSchema.statics = {
@@ -28,8 +28,8 @@ SignRecordSchema.statics = {
   getLatestSign: function (page, limit) {
     return this.find({})
       .populate({
-        path: 'uid',
-        select: '_id name pic',
+        path: "uid",
+        select: "_id name pic",
       })
       .skip(page * limit)
       .limit(limit)
@@ -42,8 +42,8 @@ SignRecordSchema.statics = {
       created: { $gte: new Date(moment().hour(0).minute(0).second(0)) },
     })
       .populate({
-        path: 'uid',
-        select: '_id name pic',
+        path: "uid",
+        select: "_id name pic",
       })
       .skip(page * limit)
       .limit(limit)
@@ -73,19 +73,19 @@ SignRecordSchema.statics = {
       .sort({ created: 1 })
       .limit(20)
       .populate({
-        path: 'uid',
-        select: 'name pic isVip _id',
+        path: "uid",
+        select: "name pic isVip _id",
       });
   },
   // 取得最新签到
   findLastSign: function () {
     return this.find({}).sort({ created: -1 }).limit(20).populate({
-      path: 'uid',
-      select: 'name pic isVip _id',
+      path: "uid",
+      select: "name pic isVip _id",
     });
   },
 };
 
-const SignRecord = mongoose.model('sign_record', SignRecordSchema);
+const SignRecord = mongoose.model("sign_record", SignRecordSchema);
 
 export default SignRecord;
