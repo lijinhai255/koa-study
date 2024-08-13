@@ -1,4 +1,5 @@
-const combileRoutes = require("koa-combine-routers");
-const aRoutes = require("./aRouter");
-const bRoutes = require("./bRouter");
-module.exports = combileRoutes(aRoutes, bRoutes);
+import combileRoutes from "koa-combine-routers";
+
+import publicRouters from "./modules/publicRouter";
+import loginRouters from "./modules/loginRouter";
+module.exports = combileRoutes(publicRouters, loginRouters);

@@ -1,22 +1,22 @@
 const path = require("path");
 
 const utils = require("./utils");
-const nodeExternals = require("webpack-node-externals");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const webpack = require("webpack");
+const nodeExcternals = require("webpack-node-externals");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const webpackconfig = {
   target: "node",
-  mode:
-    process.env.NODE_ENV === "production" || process.env.NODE_ENV === "prod"
-      ? "production"
-      : "development",
   entry: {
     server: path.join(utils.APP_PATH, "index.js"),
+  },
+  resolve: {
+    ...utils.getWebpackResolveConfig(),
   },
   output: {
     filename: "[name].bundle.js",
     path: utils.DIST_PATH,
+    libraryTarget: "commonjs2", // Ensure output is in CommonJS format
   },
   module: {
     rules: [
@@ -25,26 +25,22 @@ const webpackconfig = {
         use: {
           loader: "babel-loader",
         },
-        exclude: [path.join(__dirname, "node_modules")], // Correct property
+        exclude: [path.join(__dirname, "/node_modules")],
       },
     ],
   },
-  externals: [nodeExternals()],
+  externals: [nodeExcternals()],
   plugins: [
     new CleanWebpackPlugin(),
-    new webpack.DefinePlugin({
-      // Creating global variables
-      "process.env.NODE_ENV": JSON.stringify(
-        process.env.NODE_ENV === "production" || process.env.NODE_ENV === "prod"
-          ? "production"
-          : "development"
-      ),
-    }),
+    new webpack.EnvironmentPlugin(["NODE_ENV"]),
   ],
-  stats: {
-    children: false,
-    warnings: false,
+  node: {
+    global: true,
+    __filename: true,
+    __dirname: true,
   },
 };
+
+// console.log(webpackconfig)
 
 module.exports = webpackconfig;

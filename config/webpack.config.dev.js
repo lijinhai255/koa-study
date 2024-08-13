@@ -1,10 +1,15 @@
-const webpackMerge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 
 const baseWebpackConfig = require("./webpack.config.base");
-const webpackconfig = webpackMerge(baseWebpackConfig, {
+const NodemonPlugin = require("nodemon-webpack-plugin");
+
+const webpackConfig = merge(baseWebpackConfig, {
   mode: "development",
   devtool: "eval-source-map",
   stats: { children: false },
+  plugins: [
+    new NodemonPlugin(), // Dong
+  ],
 });
 
-module.exports = webpackconfig;
+module.exports = webpackConfig;
