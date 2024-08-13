@@ -13,7 +13,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           warnings: false,
           compress: {
             warnings: false,
-            // 是否pm注释掉console
+            // 是否注释掉console
             drop_console: false,
             dead_code: true,
             drop_debugger: true,
