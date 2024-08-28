@@ -11,8 +11,8 @@ services:
     restart: always
     # env_file: .env
     environment:
-      - DB_USER=toimc
-      - DB_PASS=long_random_pass_mongo
+      - DB_USER=root
+      - DB_PASS=example
       - DB_HOST=mongo
       - DB_PORT=27017
       - DB_NAME=community

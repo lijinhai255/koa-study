@@ -1,12 +1,13 @@
 import path from "path";
 
-const MONGO_USERNAME = process.env.DB_USER || "test";
-const MONGO_PASSWORD = process.env.DB_PASS || "123456";
+// const MONGO_USERNAME = process.env.DB_USER || "test";
+// const MONGO_PASSWORD = process.env.DB_PASS || "123456";
 const MONGO_HOSTNAME = process.env.DB_HOST || "42.193.104.12";
-const MONGO_PORT = process.env.DB_PORT || "27017";
+// const MONGO_PORT = process.env.DB_PORT || "27017";
 const DB_NAME = process.env.DB_NAME || "initaldb";
 
 // const DB_URL = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${DB_NAME}`;
+// const DB_URL = `mongodb://root:example@mongo:27017/community?authSource=admin`;
 const DB_URL = `mongodb://localhost:27017/${DB_NAME}`;
 
 const REDIS = {
